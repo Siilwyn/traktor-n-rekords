@@ -20,7 +20,7 @@ pub struct Collection {
 pub struct Entry {
     #[serde(rename = "@TITLE")]
     pub title: String,
-    #[serde(rename = "@ARTIST")]
+    #[serde(rename = "@ARTIST", default = "empty_string")]
     pub artist: String,
     pub location: Location,
     pub info: Info,
@@ -41,9 +41,9 @@ pub struct Location {
 
 #[derive(Serialize, Deserialize)]
 pub struct Info {
-    #[serde(rename = "@GENRE")]
+    #[serde(rename = "@GENRE", default = "empty_string")]
     pub genre: String,
-    #[serde(rename = "@KEY")]
+    #[serde(rename = "@KEY", default = "empty_string")]
     pub key: String,
     #[serde(rename = "@PLAYTIME")]
     pub playtime: String,
@@ -63,4 +63,8 @@ pub struct CueV2 {
     pub start: String,
     #[serde(rename = "@HOTCUE")]
     pub hotcue: i32,
+}
+
+fn empty_string() -> String {
+    "".to_string()
 }
